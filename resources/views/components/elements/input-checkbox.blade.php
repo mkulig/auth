@@ -28,7 +28,7 @@
         />
 
         @if ($label)
-            <label for="{{ $id }}" class="cursor-pointer text-sm text-gray-600>
+            <label for="{{ $id }}" class="cursor-pointer text-sm text-gray-600">
                 {!! $label !!}
             </label>
         @endif
