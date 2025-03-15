@@ -20,7 +20,7 @@ it('redirects to login when registrations are disabled', function () {
         ->assertRedirect(route('auth.login'));
 
     expect(session('error'))->toBe(
-        config('devdojo.auth.language.register.registrations_disabled', 'Registrations are currently disabled.')
+        __('auth.register.registrations_disabled')
     );
 });
 
@@ -75,7 +75,7 @@ it('prevents email registration when disabled', function () {
 
     expect(Auth::check())->toBeFalse();
     expect(session('error'))->toBe(
-        config('devdojo.auth.language.register.email_registration_disabled', 'Email registration is currently disabled. Please use social login.')
+        config('auth.register.email_registration_disabled')
     );
 });
 

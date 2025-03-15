@@ -6,14 +6,11 @@ trait HasConfigs
 {
     public $appearance = [];
 
-    public $language = [];
-
     public $settings = [];
 
     public function loadConfigs()
     {
         $this->appearance = $this->configToArrayObject('devdojo.auth.appearance');
-        $this->language = $this->configToArrayObject('devdojo.auth.language');
         $this->settings = $this->configToArrayObject('devdojo.auth.settings');
     }
 

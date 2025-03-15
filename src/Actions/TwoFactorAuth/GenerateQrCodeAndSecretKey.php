@@ -2,11 +2,8 @@
 
 namespace Devdojo\Auth\Actions\TwoFactorAuth;
 
-use BaconQrCode\Renderer\Image\ImagickImageBackEnd;
-use BaconQrCode\Renderer\ImageRenderer;
-use BaconQrCode\Renderer\RendererStyle\RendererStyle;
+use BaconQrCode\Renderer\GDLibRenderer;
 use BaconQrCode\Writer;
-use Devdojo\Auth\Models\User;
 use PragmaRX\Google2FA\Google2FA;
 
 class GenerateQrCodeAndSecretKey
@@ -36,15 +33,11 @@ class GenerateQrCodeAndSecretKey
         );
 
         $writer = new Writer(
-            new ImageRenderer(
-                new RendererStyle(800),
-                new ImagickImageBackEnd
-            )
+            new GDLibRenderer(800)
         );
 
         $qrcode_image = base64_encode($writer->writeString($g2faUrl));
 
         return [$qrcode_image, $secret_key];
-
     }
 }
