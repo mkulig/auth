@@ -27,6 +27,7 @@ new class extends Component
     public $email = '';
     public $password = '';
     public $password_confirmation = '';
+    public $terms = false;
 
     public $showNameField = false;
     public $showPhoneField = false;
@@ -41,13 +42,13 @@ new class extends Component
             return [];
         }
 
-        $nameValidationRules = [];
+        $validationRules = [];
         if (config('devdojo.auth.settings.registration_include_name_field')) {
-            $nameValidationRules = ['name' => 'required'];
+            $validationRules = ['name' => 'required'];
         }
 
         if (config('devdojo.auth.settings.registration_include_phone_field')) {
-            $nameValidationRules = ['phone' => 'required|phone:mobile,PL'];
+            $validationRules = ['phone' => 'required|phone:mobile,PL'];
         }
 
         $passwordValidationRules = ['password' => 'required|min:8'];
@@ -55,8 +56,11 @@ new class extends Component
             $passwordValidationRules['password'] .= '|confirmed';
         }
         return array_merge(
-            $nameValidationRules,
-            ['email' => 'required|email|unique:users'],
+            $validationRules,
+            [
+                'email' => 'required|email|unique:users',
+                'terms'=>'required|accepted'
+            ],
             $passwordValidationRules,
         );
     }
@@ -206,10 +210,10 @@ new class extends Component
             <x-auth::elements.input :label="__('Confirm Password')" type="password" wire:model="password_confirmation" id="password_confirmation" name="password_confirmation" data-auth="password-confirmation-input" autocomplete="new-password" required />
             @endif
 
-            <x-auth::elements.checkbox wire:model="accept_terms" id="accept_terms" name="accept_terms" :label="__('auth.register.accept_terms_and_conditions',[
+            <x-auth::elements.input-checkbox :label="__('auth.register.accept_terms_and_conditions',[
                 'terms_url' => route('terms-of-service'),
                 'privacy_url' => route('privacy-policy')
-                ])" required />
+                ])" wire:model="terms" id="terms" name="terms" data-auth="terms-input"  />
 
             <x-auth::elements.button data-auth="submit-button" rounded="md" submit="true">{{__('Continue')}}</x-auth::elements.button>
         </form>
