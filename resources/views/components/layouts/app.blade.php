@@ -3,7 +3,7 @@
 <head>
     @include('auth::includes.head')
 </head>
-<body id="auth-body" class="overflow-hidden relative w-screen h-screen" style="background-color:{{ config('devdojo.auth.appearance.background.color') }}">
+<body id="auth-body" class="relative w-screen h-screen" style="background-color:{{ config('devdojo.auth.appearance.background.color') }}">
     @php
         $dyanicPageId = str_replace('/', '-', str_replace('.', '', Request::path()));
     @endphp
@@ -22,7 +22,7 @@
         @endphp
 
         <main id="auth-main-content" class="flex relative z-30 flex-col justify-center w-screen min-h-screen {{ $slotParentClasses }}">
-            {{ $slot }} 
+            {{ $slot }}
         </main>
 
         @if(config('devdojo.auth.settings.enable_branding') && !app()->isLocal())
