@@ -59,7 +59,7 @@ new class extends Component
             $validationRules,
             [
                 'email' => 'required|email|unique:users',
-                'terms'=>'required|accepted'
+                'terms' => 'required|accepted'
             ],
             $passwordValidationRules,
         );
@@ -177,7 +177,7 @@ new class extends Component
     @volt('auth.register')
     <x-auth::elements.container>
 
-        <x-auth::elements.heading :text="__('Sign Up')" :description="__('auth.register.subheadline')" :show_subheadline="($settings->register_show_subheadline ?? false)" />
+        <x-auth::elements.heading :text="__('Register')" :description="__('auth.register.subheadline')" :show_subheadline="($settings->register_show_subheadline ?? false)" />
         <x-auth::elements.session-message />
 
         @if(config('devdojo.auth.settings.social_providers_location') == 'top')

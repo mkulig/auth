@@ -6,6 +6,10 @@ use Devdojo\Auth\Traits\HasConfigs;
 use function Laravel\Folio\{middleware, name};
 use Livewire\Volt\Component;
 
+if (!isset($_GET['preview']) || (isset($_GET['preview']) && $_GET['preview'] != true) || !app()->isLocal()) {
+    middleware(['guest']);
+}
+
 //middleware(['auth', 'throttle:6,1']);
 name('verification.notice');
 
